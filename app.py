@@ -1,107 +1,135 @@
 from flask import Flask, jsonify, request
+from pony import orm
+from baza import Pas
 
 app = Flask(__name__)
-
-psi = [
-    {
-        "id": 1,
-        "ime": "Rex",
-        "pasmina": "Njemački ovčar",
-        "spol": "M",
-        "starost": 5,
-        "datum_prijema": "2024-04-10",
-        "status_udomljenja": "dostupan",
-        "opis": "Mirnog karaktera i voli šetnje."
-    },
-    {
-        "id": 2,
-        "ime": "Luna",
-        "pasmina": "Mješanac",
-        "spol": "Ž",
-        "starost": 3,
-        "datum_prijema": "2024-05-02",
-        "status_udomljenja": "udomljen",
-        "opis": "Druželjubiva i naviknuta na ljude."
-    }
-]
 
 @app.route('/', methods=["GET"])
 def home():
     return "Skloniste za pse radi."
 
 @app.route('/psi', methods=["GET"])
+@orm.db_session
 def prikazi_pse():
-    return jsonify(psi)
+    lista_pasa = []
+
+    for pas in Pas.select():
+        lista_pasa.append({
+            "id": pas.id,
+            "ime": pas.ime,
+            "pasmina": pas.pasmina,
+            "spol": pas.spol,
+            "starost": pas.starost,
+            "datum_prijema": pas.datum_prijema,
+            "status_udomljenja": pas.status_udomljenja,
+            "opis": pas.opis
+        })
+
+    return jsonify(lista_pasa)
 
 @app.route("/psi/<int:id>", methods=["GET"])
+@orm.db_session
 def detalji_psa(id):
-    for pas in psi:
-        if pas["id"] == id:
-            return jsonify(pas)
+    pas = Pas.get(id=id)
 
-    return "404 - not found", 404
+    if pas is None:
+        return "Pas nije pronađen", 404
+
+    return jsonify({
+        "id": pas.id,
+        "ime": pas.ime,
+        "pasmina": pas.pasmina,
+        "spol": pas.spol,
+        "starost": pas.starost,
+        "datum_prijema": pas.datum_prijema,
+        "status_udomljenja": pas.status_udomljenja,
+        "opis": pas.opis
+    })
 
 
 #POST dio:
 
 @app.route("/psi", methods=["POST"])
+@orm.db_session
 def dodaj_psa():
     podaci = request.get_json()
 
-    novi_pas = {
-        "id": len(psi) + 1,
-        "ime": podaci["ime"],
-        "pasmina": podaci["pasmina"],
-        "spol": podaci["spol"],
-        "starost": podaci["starost"],
-        "datum_prijema": podaci["datum_prijema"],
-        "status_udomljenja": podaci["status_udomljenja"],
-        "opis": podaci["opis"]
-    }
+    novi_pas = Pas(
+        ime=podaci["ime"],
+        pasmina=podaci["pasmina"],
+        spol=podaci["spol"],
+        starost=podaci["starost"],
+        datum_prijema=podaci["datum_prijema"],
+        status_udomljenja=podaci["status_udomljenja"],
+        opis=podaci["opis"]
+    )
 
-    psi.append(novi_pas)
+    orm.flush()
 
-    return jsonify(novi_pas), 201
+    return jsonify({
+        "id": novi_pas.id,
+        "ime": novi_pas.ime,
+        "pasmina": novi_pas.pasmina,
+        "spol": novi_pas.spol,
+        "starost": novi_pas.starost,
+        "datum_prijema": novi_pas.datum_prijema,
+        "status_udomljenja": novi_pas.status_udomljenja,
+        "opis": novi_pas.opis
+    }), 201
 
 @app.route("/psi/<int:id>", methods=["DELETE"])
+@orm.db_session
 def obrisi_psa(id):
-    for pas in psi:
-        if pas["id"] == id:
-            psi.remove(pas)
-            return "Pas je obrisan", 200
+    pas = Pas.get(id=id)
 
-    return "Pas nije pronađen", 404
+    if pas is None:
+        return "Pas nije pronađen", 404
+
+    pas.delete()
+
+    return "Pas je obrisan", 200
 
 @app.route("/psi/<int:id>", methods=["PUT"])
+@orm.db_session
 def uredi_psa(id):
     podaci = request.get_json()
 
-    for pas in psi:
-        if pas["id"] == id:
-            if "ime" in podaci:
-                pas["ime"] = podaci["ime"]
+    pas = Pas.get(id=id)
 
-            if "pasmina" in podaci:
-                pas["pasmina"] = podaci["pasmina"]
+    if pas is None:
+        return "Pas nije pronađen", 404
 
-            if "spol" in podaci:
-                pas["spol"] = podaci["spol"]
+    if "ime" in podaci:
+        pas.ime = podaci["ime"]
 
-            if "starost" in podaci:
-                pas["starost"] = podaci["starost"]
+    if "pasmina" in podaci:
+        pas.pasmina = podaci["pasmina"]
 
-            if "datum_prijema" in podaci:
-                pas["datum_prijema"] = podaci["datum_prijema"]
+    if "spol" in podaci:
+        pas.spol = podaci["spol"]
 
-            if "status_udomljenja" in podaci:
-                pas["status_udomljenja"] = podaci["status_udomljenja"]
+    if "starost" in podaci:
+        pas.starost = podaci["starost"]
 
-            if "opis" in podaci:
-                pas["opis"] = podaci["opis"]
+    if "datum_prijema" in podaci:
+        pas.datum_prijema = podaci["datum_prijema"]
 
-            return jsonify(pas), 200
+    if "status_udomljenja" in podaci:
+        pas.status_udomljenja = podaci["status_udomljenja"]
 
-    return "Pas nije pronađen", 404
+    if "opis" in podaci:
+        pas.opis = podaci["opis"]
+
+    return jsonify({
+        "id": pas.id,
+        "ime": pas.ime,
+        "pasmina": pas.pasmina,
+        "spol": pas.spol,
+        "starost": pas.starost,
+        "datum_prijema": pas.datum_prijema,
+        "status_udomljenja": pas.status_udomljenja,
+        "opis": pas.opis
+    }), 200
 
 if __name__ == "__main__":
     app.run(port=8080)
