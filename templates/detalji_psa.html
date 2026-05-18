@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <head>
     <title>Detalji psa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stil.css') }}">
 </head>
 <body>
     <h1>Detalji psa</h1>
 
-    <p><strong>ID:</strong> {{ pas.id }}</p>
+
     <p><strong>Ime:</strong> {{ pas.ime }}</p>
     <p><strong>Pasmina:</strong> {{ pas.pasmina }}</p>
     <p><strong>Spol:</strong> {{ pas.spol }}</p>

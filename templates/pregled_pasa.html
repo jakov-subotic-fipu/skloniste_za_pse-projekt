@@ -2,11 +2,10 @@
 
 <head>
     <title>Pregled pasa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stil.css') }}">
 </head>
 <body>
     <h1>Pregled pasa</h1>
-
-    <a href="/">Povratak na početnu</a>
 
     <hr>
 
@@ -15,23 +14,22 @@
     {% if psi %}
         <table border="1" cellpadding="8">
             <tr>
-                <th>Uredi</th>
-                <th>ID</th>
+
+
                 <th>Ime</th>
                 <th>Pasmina</th>
                 <th>Spol</th>
                 <th>Starost</th>
                 <th>Status udomljenja</th>
                 <th>Detalji</th>
+                <th>Uredi</th>
                 <th>Brisanje</th>
             </tr>
 
             {% for pas in psi %}
             <tr>
-                <td>
-                    <a href="/pas/{{ pas.id }}/uredi">Uredi</a>
-                </td>
-                <td>{{ pas.id }}</td>
+
+
                 <td>{{ pas.ime }}</td>
                 <td>{{ pas.pasmina }}</td>
                 <td>{{ pas.spol }}</td>
@@ -39,6 +37,9 @@
                 <td>{{ pas.status_udomljenja }}</td>
                 <td>
                 <a href="/pas/{{ pas.id }}">Detalji</a>
+                </td>
+                <td>
+                    <a href="/pas/{{ pas.id }}/uredi">Uredi</a>
                 </td>
                 <td>
                     <form method="POST" action="/pas/{{ pas.id }}/obrisi">

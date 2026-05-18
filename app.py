@@ -4,9 +4,24 @@ from baza import Pas
 
 app = Flask(__name__)
 
-@app.route('/', methods=["GET"])
-def home():
-    return render_template("pocetna.html")
+@app.route("/", methods=["GET"])
+@orm.db_session
+def pocetna():
+    lista_pasa = []
+
+    for pas in Pas.select():
+        lista_pasa.append({
+            "id": pas.id,
+            "ime": pas.ime,
+            "pasmina": pas.pasmina,
+            "spol": pas.spol,
+            "starost": pas.starost,
+            "datum_prijema": pas.datum_prijema,
+            "status_udomljenja": pas.status_udomljenja,
+            "opis": pas.opis
+        })
+
+    return render_template("pregled_pasa.html", psi=lista_pasa)
 
 @app.route('/psi', methods=["GET"])
 @orm.db_session
