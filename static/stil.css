@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f5f1;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "Sklonište za pse";
+    display: block;
+    background-color: #2f4f2f;
+    color: white;
+    padding: 18px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2f4f2f;
+    margin: 0 40px 20px 40px;
+}
+
+p {
+    margin-left: 40px;
+    margin-right: 40px;
+    line-height: 1.5;
+}
+
+a {
+    color: #2f6f3e;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    margin: 20px 40px;
+}
+
+table {
+    width: auto;
+    min-width: 850px;
+    margin: 20px 40px;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+th {
+    background-color: #2f4f2f;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #eef5ec;
+}
+
+th:last-child,
+td:last-child {
+    width: 230px;
+    white-space: nowrap;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    max-width: 520px;
+    margin-left: 40px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 9px;
+    margin-top: 5px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+button {
+    background-color: #6bb7e8;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #4fa3d8;
+}
+
+td a {
+    display: inline-block;
+    background-color: #6bb7e8;
+    color: white;
+    padding: 6px 9px;
+    border-radius: 4px;
+    margin-left: 0;
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+td a:hover {
+    background-color: #4fa3d8;
+    text-decoration: none;
+}
+
+td form {
+    display: inline;
+    background: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+td form button {
+    background-color: #f0b429;
+    color: #222;
+    padding: 6px 9px;
+    font-size: 14px;
+}
+
+td form button:hover {
+    background-color: #d99a00;
+}
