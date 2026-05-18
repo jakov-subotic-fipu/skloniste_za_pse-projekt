@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <title>Uredi psa</title>
+</head>
+<body>
+    <h1>Uredi psa</h1>
+
+    <form method="POST" action="/pas/{{ pas.id }}/uredi">
+        <label>Ime:</label><br>
+        <input type="text" name="ime" value="{{ pas.ime }}" required><br><br>
+
+        <label>Pasmina:</label><br>
+        <input type="text" name="pasmina" value="{{ pas.pasmina }}" required><br><br>
+
+        <label>Spol:</label><br>
+        <input type="text" name="spol" value="{{ pas.spol }}" required><br><br>
+
+        <label>Starost:</label><br>
+        <input type="number" name="starost" value="{{ pas.starost }}" required><br><br>
+
+        <label>Datum prijema:</label><br>
+        <input type="text" name="datum_prijema" value="{{ pas.datum_prijema }}" required><br><br>
+
+        <label>Status udomljenja:</label><br>
+        <input type="text" name="status_udomljenja" value="{{ pas.status_udomljenja }}" required><br><br>
+
+        <label>Opis:</label><br>
+        <textarea name="opis">{{ pas.opis }}</textarea><br><br>
+
+        <button type="submit">Spremi promjene</button>
+    </form>
+
+    <br>
+    <a href="/pregled-pasa">Povratak na pregled pasa</a>
+</body>
+</html>

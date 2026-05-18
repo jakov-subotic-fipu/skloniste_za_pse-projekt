@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <title>Dodaj psa</title>
+</head>
+<body>
+    <h1>Dodaj psa</h1>
+
+    <form method="POST" action="/pas/dodaj">
+        <label>Ime:</label><br>
+        <input type="text" name="ime" required><br><br>
+
+        <label>Pasmina:</label><br>
+        <input type="text" name="pasmina" required><br><br>
+
+        <label>Spol:</label><br>
+        <input type="text" name="spol" required><br><br>
+
+        <label>Starost:</label><br>
+        <input type="number" name="starost" required><br><br>
+
+        <label>Datum prijema:</label><br>
+        <input type="text" name="datum_prijema" placeholder="YYYY-MM-DD" required><br><br>
+
+        <label>Status udomljenja:</label><br>
+        <input type="text" name="status_udomljenja" required><br><br>
+
+        <label>Opis:</label><br>
+        <textarea name="opis"></textarea><br><br>
+
+        <button type="submit">Dodaj psa</button>
+    </form>
+
+    <br>
+    <a href="/pregled-pasa">Povratak na pregled pasa</a>
+</body>
+</html>
