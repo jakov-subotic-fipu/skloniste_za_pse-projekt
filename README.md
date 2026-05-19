@@ -1,22 +1,15 @@
 # Sklonište za pse
 
-Management pasa u skloništu
-
-Projekt izrađen kao dio kolegija Informacijski sustavi na FIPU.
-
 Projekt se fokusira na potrebu skloništa za pse za jednostavnim vođenjem evidencije pasa, njihovih osnovnih podataka i statusa udomljenja.
 
 ## Opis
 
-Sklonište za pse je web aplikacija za upravljanje podacima o psima u skloništu koja omogućuje osnovne CRUD operacije – dodavanje, pregled, ažuriranje i brisanje pasa.
-
 Aplikacija omogućuje unos osnovnih podataka za svakog psa, kao što su ime, pasmina, spol, starost, datum prijema, status udomljenja i opis.
-
 Backend je izrađen u Pythonu pomoću Flask okvira, dok se za bazu podataka koristi SQLite zajedno s PonyORM-om. Frontend koristi HTML i CSS kako bi se omogućilo jednostavno korištenje aplikacije kroz web preglednik.
 
 ## UseCase dijagram
 
-![UseCase dijagram](usecase.png)
+![UseCase dijagram](use_case.png)
 
 ## Kako pokrenuti aplikaciju
 
