@@ -15,7 +15,7 @@ Backend je izrađen u Pythonu pomoću Flask okvira, dok se za bazu podataka kori
 
 ### Pomoću Docker-a
 
-Instalirajte Docker – osigurajte da imate instaliran Docker na svom računalu.
+Instalirajte Docker.
 
 Klonirajte repozitorij:
 
@@ -36,9 +36,7 @@ Pokrenite aplikaciju:
 docker run -p 8080:8080 skloniste-za-pse
 ```
 
-Otvorite preglednik:
-
-Aplikacija će biti dostupna na http://127.0.0.1:8080.
+Aplikacija je dostupna na http://127.0.0.1:8080.
 
 
 
